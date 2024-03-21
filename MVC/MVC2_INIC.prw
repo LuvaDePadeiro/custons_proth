@@ -3,10 +3,18 @@
 
 User Function MVC2_INIC()
     Local oBrowse := FWMBrowse():New()
+    Local oValid := Check():New()
+    Local lValid := oValid:Acess()
 
     oBrowse:SetAlias("ZZB")
     oBrowse:SetDescription("Usuarios X Acessos")
-    oBrowse:Activate()
+
+    if lValid
+        oBrowse:Activate()
+    else 
+        MsgAlert("Usuario sem acesso a rotina")
+    endif  
+
 Return
 
 Static Function MenuDef()
@@ -51,8 +59,8 @@ Static Function ViewDef()
     oView:AddField("VIEW_ZZB",oStruc,"ZZB_MASTER")
     oView:AddGrid("VIEW_GRID",oStrucGrid,"ZZB_GRID")
     
-    oView:CreateHorizontalBox("MAIN", 25)
-    oView:CreateHorizontalBox("GRID", 75)
+    oView:CreateHorizontalBox("MAIN", 40)
+    oView:CreateHorizontalBox("GRID", 60)
 
     oView:SetOwnerView("VIEW_ZZB","MAIN")
     oView:SetOwnerView("VIEW_GRID","GRID")

@@ -6,6 +6,7 @@ User Function ZAS()
 
     oBrowse:SetAlias("SC5")
     oBrowse:SetDescription("Vendas")
+    //oBrowse:BeforeExecute("U_ZAS",1)
     oBrowse:Activate()
 
 Return

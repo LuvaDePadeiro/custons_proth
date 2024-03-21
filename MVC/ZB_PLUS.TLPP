@@ -1,0 +1,45 @@
+#include 'tlpp-core.th'
+#Include 'Protheus.ch'
+#Include 'FWMVCDef.ch'
+
+
+//Criar uma validaÃ§Ã£o para as rotinas customizadas
+
+Class Check
+	public Method New()
+	public Method Acess() as Logical
+EndClass
+
+Method New() class Check
+Return Self
+
+Method Acess() as Logical class Check
+	Local cUserLogado as Character
+	Local cRotAtual as Character
+	Local aMods := {} as Array
+	Local lAcesso as Logical
+	
+	lAcesso:=.f.
+	cUserLogado := RetCodUsr()
+	cRotAtual := oApp:oMainWnd:cTitle
+
+	dbSelectArea("ZZB")
+	dbSetOrder(1)
+	dbGoTop()
+
+	//Olha dentro da tabela ZZB e salva as funções cadastradas do usuario corrente
+	while !Eof()
+		if Alltrim(ZB_CODUSU) == Alltrim(cUserLogado)
+			Aadd(aMods,AllTRim(ZB_FUNCAO))
+		endif
+		dbSkip()
+
+	end
+	dbCloseArea()
+
+	//Caso a rotina que ele esteja acessando esteja na tabela, a função retorna True
+	if aScan(aMods,cRotAtual)
+        lAcesso := .t.
+	endif
+
+Return lAcesso
