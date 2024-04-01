@@ -3,6 +3,8 @@
 
 User Function MVC_INIC()
     Local oBrowse:= FWMBrowse():New()
+    Local oValid := Check():New()
+    Local lValid := oValid:Acess()
     
     oBrowse:SetAlias("SA1")
     //oBrowse:AddLegend("ZB_ATIVO=='S'","WHITE","USER ATIVO")
@@ -10,7 +12,11 @@ User Function MVC_INIC()
 
     oBrowse:SetDescription("Clientes")
 
-    oBrowse:Activate()    
+    if lValid
+        oBrowse:Activate()
+    else 
+        MsgAlert("Usuario sem acesso a rotina")
+    endif      
 
 return 
 
@@ -46,7 +52,4 @@ Static Function ViewDef()
     oView:SetOwnerView("VIEW_SA1","TELA")
     oView:SetCloseOnOk({||.T.})
     
-
-    //oView:RemoveField("SA1_MVC")
-
 return oView
