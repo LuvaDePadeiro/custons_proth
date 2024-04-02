@@ -3,12 +3,17 @@
 
 User Function ZAS()
     Local oBrowse := FWMBrowse():New()
+    Local lValid := oValid:Acess()
 
     oBrowse:SetAlias("SC5")
     oBrowse:SetDescription("Vendas")
     //oBrowse:BeforeExecute("U_ZAS",1)
-    oBrowse:Activate()
 
+    if lValid
+        oBrowse:Activate()
+    else 
+        MsgAlert("Usuario sem acesso a rotina")
+    endif 
 Return
 
 Static Function MenuDef()

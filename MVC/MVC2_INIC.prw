@@ -3,7 +3,7 @@
 
 User Function MVC2_INIC()
     Local oBrowse := FWMBrowse():New()
-    Local oValid := Check():New()
+    Local oValid := ValidACS():New()
     Local lValid := oValid:Acess()
 
     oBrowse:SetAlias("ZZB")
