@@ -17,19 +17,19 @@ Method Acess() as Logical class ValidACS
 	Local aBindParam as Array
 	Local cQuery as Character
 	Local cAlias as Character
-	Local cRotAtual as Character
+	Local cRot as Character
 	Local lAcesso as Logical
 	Local nRec := 0 as Numeric 
 	
 	lAcesso:=.f.
-	cRotAtual:= oApp:oMainWnd:cTitle
+	cRot:= FUNNAME()
 
 	cQuery:=" SELECT * FROM " + RetSQLName("ZZB") + ENTER
 	cQuery+=" WHERE D_E_L_E_T_ <> '*' AND " + ENTER
 	cQuery+=" ZB_CODUSU = ? AND " + ENTER
 	cQuery+=" ZB_FUNCAO = ? " + ENTER
 
-	aBindParam:={Alltrim(RetCodUsr()),AllTRim(cRotAtual)}
+	aBindParam:={Alltrim(RetCodUsr()),AllTRim(cRot)}
 
 	cAlias := MPSysOpenQuery( cQuery,"TRBZB",,,aBindParam)
 
@@ -37,7 +37,7 @@ Method Acess() as Logical class ValidACS
 	Count To nRec
 
 	If nRec == 0
-		Alert("NAO FORAM ENCONTRADOS DADOS, REFAÇA OS PARAMETROS","ATENCAO")
+		Alert("NAO FORAM ENCONTRADOS DADOS PARA ESSE USUARIO","ATENCAO")
 		DbSelectArea(cAlias)
 		dbCloseArea()
 		Return
@@ -47,7 +47,7 @@ Method Acess() as Logical class ValidACS
 	dbGoTop()
 	//Olhando dentro da consulta e conferindo qual dos acessos do usuario bate com a rotina atual
 	while !Eof()
-		if AllTRim(ZB_FUNCAO) == cRotAtual
+		if AllTRim(ZB_FUNCAO) == cRot
 			lAcesso := .t.
 		endif
 		dbSkip()

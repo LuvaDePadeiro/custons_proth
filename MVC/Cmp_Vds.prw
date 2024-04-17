@@ -1,14 +1,13 @@
 #INCLUDE 'PROTHEUS.CH'
 #INCLUDE 'FWMVCDEF.CH'
 
-User Function ZAS()
+User Function Cmp_SVds()
     Local oBrowse := FWMBrowse():New()
     Local lValid := oValid:Acess()
 
     oBrowse:SetAlias("SC5")
     oBrowse:SetDescription("Vendas")
-    //oBrowse:BeforeExecute("U_ZAS",1)
-
+    
     if lValid
         oBrowse:Activate()
     else 
