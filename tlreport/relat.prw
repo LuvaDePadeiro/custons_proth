@@ -58,5 +58,13 @@ Static Function ReportPrint(oReport)
 
 	oSection1:EndQuery()
 
+	oSection1:Cell('B1_CODITE'	):Show()
+	oSection1:Cell('B1_COD'	 	):Hide()
+	oSection1:Cell('B1_TIPO'	):Show()
+	oSection1:Cell('B1_DESC'	):Show()
+
+	oSection1:Print()
+
+	oSection1:Finish()
 
 return
